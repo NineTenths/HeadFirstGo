@@ -6,6 +6,8 @@ to enter an integer to be added to the slice. The program adds the integer to th
 slice, and prints the contents of the slice in sorted order. The slice must grow in size to
 accommodate any number of integers which the user decides to enter. The program should only quit
 (exiting the loop) when the user enters the character ‘X’ instead of an integer.
+
+1/1/2021
 */
 package main
 
