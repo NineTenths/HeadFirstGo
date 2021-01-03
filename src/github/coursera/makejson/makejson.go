@@ -9,6 +9,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -32,4 +33,9 @@ func main() {
 	person["name"] = pName
 	pAddress := getInput("Enter an address: ")
 	person["address"] = pAddress
+	pJson, err := json.Marshal(person)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(pJson))
 }
