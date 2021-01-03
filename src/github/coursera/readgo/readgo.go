@@ -16,6 +16,42 @@ through your slice of structs and print the first and last names found in each s
 
 package main
 
-func main() {
+import (
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+	"strings"
+)
 
+type name struct {
+	fname string
+	lname string
+}
+
+func main() {
+	var people []name
+	fmt.Print("Enter a file name (in the same folder as this executable): ")
+	reader := bufio.NewReader(os.Stdin)
+	fName, err := reader.ReadString('\n')
+	if err != nil {
+		log.Fatal(err)
+	}
+	fName = strings.TrimSpace(fName)
+	file, err := os.Open(fName)
+	if err != nil {
+		log.Fatal(err)
+	}
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		fullName := strings.Split(scanner.Text(), " ")
+		var person name
+		person.fname = fullName[0]
+		person.lname = fullName[1]
+		people = append(people, person)
+	}
+	fmt.Println("The names found in the file are:")
+	for _, person := range people {
+		fmt.Printf("%s %s\n", person.fname, person.lname)
+	}
 }
